@@ -1,0 +1,149 @@
+ROLES REVERSED
+==============
+
+Roles invertidos
+
+funciones al reves
+tareas al revés
+
+Muñequitos que la tocarlos cambien su rol
+
+TÚ ERES UNA PLATAFORMA O UN LABERINTO <--- "eres el otro"
+
+físicamente invertido
+(un plataformas al revés) que el techo sea el suelo
+- que la plataforma salte encima de personas
+Controlar al enemigo - Dangeon keeper
+Elementos invertidos (fuego moja/congela, agua seca)
+Champiñones y tortugas comiendo humanos
+
+En vez de controlar nosotros el juego, el juego nos controla a nosotros
+
+Esperar a que nos aparezca un input.
+
+- Plataformas: las plataformas saltan sobre humanos
+- Cartas: las cartas tiran humanos, 
+- Puzles: tenemos que evitar que alguien pueda solucionar un puzle
+- Match-3: evitar que haya 3 del mismo color juntos
+
+bombero encienda un fuego, policia robe- crear problemas (no soluciones)
+
+No hacer mapa de un camino -> sino 
+
+serie de instrucciones invertidas (saltar -> agachar)
+
+INSTRUCCIONES INVERTIDAS <---- "haces lo contrario"
+
+Puzzle donde tú haces las cosas difíciles: 
+
+palabras invertidas
+
+TÚ ERES UN NPC
+
+NPC - tú mandas a otros a comprar ajo
+
+- Clicker:
+  * te pulsan y te vas quedando sin recursos? 
+  * Cuantos menos clicks mejor, (pero hay algo que te obliga)
+  * desacerte de cosas haciendo click (contador baja)
+
+- Arakanoid: 
+  * Eres un ladrillo
+  * construlles ladrillos 
+
+Space Invaders
+ - en vez de proteger, eres un invasor
+ - un scroller - pero tú eres las defensas que tienes que evitar que la nave llegue al final
+ 
+ Plants vs Zombies pero tú eres el zombie
+ 
+ Juego de carreras
+ 
+ - 
+
+
+Bad CEO simulator
+-----------------
+ 
+ Tu objetivo es cargarte Twitter en menos de 60 días.
+ Comienzas con mill millones de euros y tienes que conseguir que twitter se hunda antes de que pasen eso 60 días.
+ Para ello tienes mécanicas como:
+ 
+ 
+ Actions:
+ Fire employee
+ Change terms
+ Invest in crypto
+ Change software feature
+ PR stunt
+ Hire new VP
+ Public statement
+ Invest in new startup
+ Create paywall
+ 
+ Events:
+ * New clone site: Block: R:down, U:- / Ignore: U:down, R:-
+ * Government investigation/Regulations: Colaborate: M:down, R:- / Attack: R: down, M:-
+ * Judge ruling: 
+ * Fine: Pay: M:down, Default: A: down
+ * Rocket explodes: Invest more : M:down, stop: U:down
+ * Crypto crash:
+ * Outage: Say it is a feature: A: down, R:up; on it: 
+ * Regime Ban: accept censorship: R:down / fight against cernsorsip: U/A: down
+ * Walkouts: fire people: R: down / concede demands: M: down
+ 
+ - Despedir empleados -> recibir denuncias 
+ - Cargarte features
+ - Crear outages
+ - dar hype a shitcoins
+ - Outsourcing
+ - Publicar cosas en timeline
+ 
+Clicker o estilo reigns
+ 
+Platformer per con controles invertidos
+
+*****W*****************
+*    |                *
+*    v                *
+* A  S  D             *
+* -> ^ <-             *
+*    |                *
+* o->               P *
+***********************
+
+***********************
+*                     *
+*                     *
+*                     *
+* o->    S          P *
+**********    *********
+**********^^^^*********
+***********************
+LadrilloMan -> en vez de destruir, construyes y encierras a los enemigos en ladrillos
+
+Super mario está atrapado y te tiene que salvar (tienes una conversación rara con tu captor)
+
+
+el personaje se mueve solo y tú controlas el entorno -> pinchos, saltos, plataformas
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
