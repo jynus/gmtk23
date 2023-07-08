@@ -1,8 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7hyvfmx00g24"]
+[gd_scene load_steps=13 format=3 uid="uid://b7hyvfmx00g24"]
 
 [ext_resource type="Texture2D" uid="uid://bbsai0ufhvr3k" path="res://assets/sprites/graph.png" id="1_1bc68"]
+[ext_resource type="Script" path="res://scripts/game_loop.gd" id="1_ex1d5"]
 [ext_resource type="FontFile" uid="uid://btvwq11pvkgw7" path="res://assets/fonts/minimal5x7.ttf" id="2_qlmu1"]
 [ext_resource type="FontFile" uid="uid://clklxr6keityt" path="res://assets/fonts/basis33.ttf" id="3_70j3y"]
+[ext_resource type="PackedScene" uid="uid://bh71olny4pi0k" path="res://scene_objects/category.tscn" id="4_jkiuj"]
+[ext_resource type="PackedScene" uid="uid://c4724smqdfkk6" path="res://scene_objects/pause_menu.tscn" id="5_0g02i"]
+[ext_resource type="Texture2D" uid="uid://gm6w5or1ko6v" path="res://assets/sprites/arrowdownred.png" id="7_veo7s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ovlj2"]
 font = ExtResource("2_qlmu1")
@@ -51,219 +55,58 @@ default_font = ExtResource("3_70j3y")
 default_font_size = 16
 
 [node name="game_loop" type="Node2D"]
+script = ExtResource("1_ex1d5")
 
 [node name="graph" type="Sprite2D" parent="."]
 texture_repeat = 2
-position = Vector2(158, 54)
+position = Vector2(158, 48)
 texture = ExtResource("1_1bc68")
 region_enabled = true
 region_rect = Rect2(0, 0, 300, 30)
 
-[node name="Money" type="Label" parent="."]
-offset_left = 9.0
-offset_top = 5.0
-offset_right = 40.0
-offset_bottom = 18.0
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_right = 320.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+columns = 2
+
+[node name="Money" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Money:  1,000,000,000.00"
 label_settings = SubResource("LabelSettings_ovlj2")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Users" type="Label" parent="."]
-offset_left = 9.0
-offset_top = 18.0
-offset_right = 115.0
-offset_bottom = 31.0
-text = "Users:  400,000,000.00"
+[node name="Users" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Users:  400,000,000"
 label_settings = SubResource("LabelSettings_ovlj2")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Users2" type="Label" parent="."]
-offset_left = 184.0
-offset_top = 5.0
-offset_right = 307.0
-offset_bottom = 18.0
+[node name="Reputation" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Reputation:  Excelent"
 label_settings = SubResource("LabelSettings_ovlj2")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Users3" type="Label" parent="."]
-offset_left = 184.0
-offset_top = 18.0
-offset_right = 307.0
-offset_bottom = 31.0
+[node name="Availability" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Availability:  99.99999%"
 label_settings = SubResource("LabelSettings_ovlj2")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "graph_move"
 libraries = {
 "": SubResource("AnimationLibrary_e754d")
 }
-
-[node name="Button" type="Button" parent="."]
-offset_left = 9.0
-offset_top = 81.0
-offset_right = 150.0
-offset_bottom = 105.0
-theme = SubResource("Theme_h5mdv")
-text = "Fire employee"
-
-[node name="Button2" type="Button" parent="."]
-offset_left = 9.0
-offset_top = 127.0
-offset_right = 151.0
-offset_bottom = 151.0
-theme = SubResource("Theme_h5mdv")
-text = "Invest in crypto"
-
-[node name="Button3" type="Button" parent="."]
-offset_left = 9.0
-offset_top = 183.0
-offset_right = 151.0
-offset_bottom = 207.0
-theme = SubResource("Theme_h5mdv")
-text = "PR Stunt"
-
-[node name="Button4" type="Button" parent="."]
-offset_left = 160.0
-offset_top = 81.0
-offset_right = 300.0
-offset_bottom = 105.0
-theme = SubResource("Theme_h5mdv")
-text = "Change terms"
-
-[node name="Button5" type="Button" parent="."]
-offset_left = 160.0
-offset_top = 127.0
-offset_right = 303.0
-offset_bottom = 151.0
-theme = SubResource("Theme_h5mdv")
-text = "Change SW feature"
-
-[node name="Button6" type="Button" parent="."]
-offset_left = 160.0
-offset_top = 232.0
-offset_right = 303.0
-offset_bottom = 256.0
-theme = SubResource("Theme_h5mdv")
-text = "Hire new VP"
-
-[node name="Button7" type="Button" parent="."]
-offset_left = 9.0
-offset_top = 232.0
-offset_right = 151.0
-offset_bottom = 256.0
-theme = SubResource("Theme_h5mdv")
-text = "Public statement"
-
-[node name="Button8" type="Button" parent="."]
-offset_left = 160.0
-offset_top = 183.0
-offset_right = 302.0
-offset_bottom = 207.0
-theme = SubResource("Theme_h5mdv")
-text = "Invest in startup"
-
-[node name="Users4" type="Label" parent="."]
-offset_left = 9.0
-offset_top = 112.0
-offset_right = 120.0
-offset_bottom = 125.0
-text = "Employees:  2,300"
-label_settings = SubResource("LabelSettings_ovlj2")
-
-[node name="Users4" type="Label" parent="Users4"]
-offset_left = 151.0
-offset_right = 262.0
-offset_bottom = 13.0
-text = "Advertisers: 100,000"
-label_settings = SubResource("LabelSettings_ovlj2")
-
-[node name="Users5" type="Label" parent="."]
-offset_left = 9.0
-offset_top = 158.0
-offset_right = 120.0
-offset_bottom = 171.0
-text = "Tokens:  30,000"
-label_settings = SubResource("LabelSettings_ovlj2")
-
-[node name="Users6" type="Label" parent="."]
-offset_left = 9.0
-offset_top = 263.0
-offset_right = 130.0
-offset_bottom = 276.0
-text = "Ratios:  0"
-label_settings = SubResource("LabelSettings_ovlj2")
-
-[node name="Button9" type="Button" parent="."]
-offset_left = 9.0
-offset_top = 281.0
-offset_right = 151.0
-offset_bottom = 305.0
-theme = SubResource("Theme_h5mdv")
-text = "Create new paywall"
-
-[node name="Users11" type="Label" parent="."]
-offset_left = 9.0
-offset_top = 312.0
-offset_right = 130.0
-offset_bottom = 325.0
-text = "Paying users: 0"
-label_settings = SubResource("LabelSettings_ovlj2")
-
-[node name="Button10" type="Button" parent="."]
-offset_left = 160.0
-offset_top = 281.0
-offset_right = 302.0
-offset_bottom = 305.0
-theme = SubResource("Theme_h5mdv")
-text = "Poll users"
-
-[node name="Users12" type="Label" parent="."]
-offset_left = 160.0
-offset_top = 312.0
-offset_right = 281.0
-offset_bottom = 325.0
-text = "User hate (msg/s):  0"
-label_settings = SubResource("LabelSettings_ovlj2")
-
-[node name="Users10" type="Label" parent="."]
-offset_left = 160.0
-offset_top = 263.0
-offset_right = 281.0
-offset_bottom = 276.0
-text = "Resignations:  0"
-label_settings = SubResource("LabelSettings_ovlj2")
-
-[node name="Users7" type="Label" parent="."]
-offset_left = 9.0
-offset_top = 212.0
-offset_right = 130.0
-offset_bottom = 225.0
-text = "Reactions:  0"
-label_settings = SubResource("LabelSettings_ovlj2")
-
-[node name="Users9" type="Label" parent="."]
-offset_left = 160.0
-offset_top = 212.0
-offset_right = 281.0
-offset_bottom = 225.0
-text = "Assets:  500,000,000"
-label_settings = SubResource("LabelSettings_ovlj2")
-
-[node name="Users8" type="Label" parent="."]
-offset_left = 160.0
-offset_top = 158.0
-offset_right = 278.0
-offset_bottom = 184.0
-text = "Unique visits per month:
- 10,000,000,000"
-label_settings = SubResource("LabelSettings_ovlj2")
-
-[node name="Button11" type="Button" parent="."]
-offset_left = 8.0
-offset_top = 325.0
-offset_right = 150.0
-offset_bottom = 349.0
-theme = SubResource("Theme_h5mdv")
-text = "Promise fix"
 
 [node name="Button13" type="Button" parent="."]
 offset_left = 16.0
@@ -281,26 +124,159 @@ offset_bottom = 725.0
 text = "Broken:  promises"
 label_settings = SubResource("LabelSettings_ovlj2")
 
-[node name="Users13" type="Label" parent="."]
-offset_left = 8.0
-offset_top = 356.0
-offset_right = 129.0
-offset_bottom = 369.0
-text = "Broken:  promises"
-label_settings = SubResource("LabelSettings_ovlj2")
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_top = 73.0
+offset_right = 320.0
+offset_bottom = 180.0
 
-[node name="Button12" type="Button" parent="."]
-offset_left = 160.0
-offset_top = 325.0
-offset_right = 302.0
-offset_bottom = 349.0
-theme = SubResource("Theme_h5mdv")
-text = "Dogwhistle"
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
 
-[node name="Users14" type="Label" parent="."]
-offset_left = 160.0
-offset_top = 356.0
-offset_right = 281.0
-offset_bottom = 369.0
-text = "Nazi counter:  0"
-label_settings = SubResource("LabelSettings_ovlj2")
+[node name="Firing" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Fire employee"
+vp_name = "HR Head"
+metric_name = "Employees"
+default_quantity = 2300
+action_effect = -1
+vp_frequency = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Container" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Change terms"
+vp_name = "Legal Head"
+metric_name = "Advertisers"
+default_quantity = 10000
+action_effect = -5
+vp_frequency = 10
+
+[node name="Crypto" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Invest in crypto"
+vp_name = "CFO"
+metric_name = "Tokens"
+action_effect = 15
+vp_frequency = 10
+
+[node name="MarginContainer2" type="MarginContainer" parent="ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="AddFeature" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Add feature"
+vp_name = "CTO"
+metric_name = "Visits"
+default_quantity = 10000000000
+action_effect = -20000
+vp_frequency = 10
+
+[node name="PRStunt" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Do PR Stunt"
+vp_name = "Comms VP"
+metric_name = "Ratios"
+action_effect = 1
+vp_frequency = 10
+
+[node name="MarginContainer3" type="MarginContainer" parent="ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="RemoveFeature" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Remove feature"
+vp_name = "Security VP"
+metric_name = "Advertisers"
+default_quantity = 10000
+action_effect = -5
+vp_frequency = 10
+
+[node name="PublicStatement" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Public Statement"
+vp_name = "PR Head"
+metric_name = "Angry analysts"
+action_effect = 12
+vp_frequency = 10
+
+[node name="MarginContainer4" type="MarginContainer" parent="ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Startup" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Invest in Startup"
+vp_name = "R&D Head"
+metric_name = "Assets"
+action_effect = 100000
+vp_frequency = 10
+
+[node name="Paywall" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Create Paywall"
+vp_name = "Analytics VP"
+metric_name = "Paying users"
+action_effect = 500
+vp_frequency = 10
+
+[node name="MarginContainer5" type="MarginContainer" parent="ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Startup2" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Poll users"
+vp_name = "CM"
+metric_name = "Hate msgs"
+action_effect = 1000
+vp_frequency = 10
+
+[node name="Promise" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Promixe Fix"
+vp_name = "Intern"
+metric_name = "Broken promises"
+action_effect = 1
+vp_frequency = 10
+
+[node name="MarginContainer6" type="MarginContainer" parent="ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Dogwhistle" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+layout_mode = 2
+size_flags_horizontal = 3
+action_name = "Dogwhistle"
+vp_name = "Assistant"
+metric_name = "Nazi counter"
+action_effect = 200
+vp_frequency = 10
+
+[node name="pauseMenu" parent="." instance=ExtResource("5_0g02i")]
+visible = false
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Arrowdownred" type="Sprite2D" parent="."]
+position = Vector2(13, 5)
+texture = ExtResource("7_veo7s")
+
+[node name="Arrowdownred2" type="Sprite2D" parent="."]
+position = Vector2(186, 5)
+texture = ExtResource("7_veo7s")
+
+[connection signal="take_action" from="ScrollContainer/GridContainer/Firing" to="." method="_on_firing_take_action"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

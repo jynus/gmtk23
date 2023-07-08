@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://3dgtundptfy8"]
+[gd_scene load_steps=14 format=3 uid="uid://djf8015rc5php"]
 
 [ext_resource type="Script" path="res://scripts/level_select.gd" id="1_rs3vw"]
 [ext_resource type="LabelSettings" uid="uid://tje0ygjwilaf" path="res://resources/small_title_label_settings.tres" id="2_gj63y"]

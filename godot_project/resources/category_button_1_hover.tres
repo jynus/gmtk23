@@ -1,0 +1,8 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://nkswy88priw1"]
+
+[ext_resource type="Texture2D" uid="uid://ccoheiaoopfg5" path="res://assets/sprites/boton02.png" id="1_j00cv"]
+
+[resource]
+texture = ExtResource("1_j00cv")
+region_rect = Rect2(0, 0, 141, 24)
+modulate_color = Color(1, 0.823529, 1, 1)

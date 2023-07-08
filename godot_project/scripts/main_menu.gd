@@ -40,7 +40,7 @@ func exit_game():
 
 func start_new_game():
 	"""Start new play session"""
-	get_tree().change_scene_to_file("res://scenes/level_select.tscn")
+	get_tree().change_scene_to_file("res://scenes/game_loop.tscn")
 
 func _on_credits_button_pressed():
 	blip.play()

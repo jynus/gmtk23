@@ -1,0 +1,72 @@
+[gd_scene load_steps=13 format=3 uid="uid://bh71olny4pi0k"]
+
+[ext_resource type="FontFile" uid="uid://clklxr6keityt" path="res://assets/fonts/basis33.ttf" id="1_3dqjg"]
+[ext_resource type="Script" path="res://scripts/category.gd" id="1_qdypa"]
+[ext_resource type="FontFile" uid="uid://btvwq11pvkgw7" path="res://assets/fonts/minimal5x7.ttf" id="2_huxq7"]
+[ext_resource type="FontFile" uid="uid://dchaxun0duwqd" path="res://assets/fonts/Berlin Sans FB Demi Bold.ttf" id="3_2pax4"]
+[ext_resource type="StyleBox" uid="uid://ddyluie24jig3" path="res://resources/category_button_1_normal.tres" id="4_rqjul"]
+[ext_resource type="StyleBox" uid="uid://nkswy88priw1" path="res://resources/category_button_1_hover.tres" id="5_52p7k"]
+[ext_resource type="StyleBox" uid="uid://wpogxbcy1cd7" path="res://resources/category_button_1_disabled.tres" id="6_o72h4"]
+[ext_resource type="StyleBox" uid="uid://b2uswr51sch7b" path="res://resources/category_button_2_normal.tres" id="7_g1ovu"]
+[ext_resource type="StyleBox" uid="uid://dtck8a034qryq" path="res://resources/category_button_2_hover.tres" id="8_18cj0"]
+[ext_resource type="StyleBox" uid="uid://cc488ooqjefkq" path="res://resources/category_button_2_disabled.tres" id="9_4vc1f"]
+
+[sub_resource type="Theme" id="Theme_h5mdv"]
+default_font = ExtResource("2_huxq7")
+default_font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_ovlj2"]
+font = ExtResource("1_3dqjg")
+shadow_size = 0
+
+[node name="Container" type="VBoxContainer"]
+offset_right = 141.0
+offset_bottom = 75.0
+script = ExtResource("1_qdypa")
+
+[node name="ActionButton" type="Button" parent="."]
+custom_minimum_size = Vector2(141, 24)
+layout_mode = 2
+theme = SubResource("Theme_h5mdv")
+theme_override_fonts/font = ExtResource("3_2pax4")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("4_rqjul")
+theme_override_styles/hover = ExtResource("5_52p7k")
+theme_override_styles/pressed = ExtResource("4_rqjul")
+theme_override_styles/disabled = ExtResource("6_o72h4")
+theme_override_styles/focus = ExtResource("4_rqjul")
+
+[node name="VIPButton" type="Button" parent="."]
+custom_minimum_size = Vector2(141, 24)
+layout_mode = 2
+theme = SubResource("Theme_h5mdv")
+theme_override_fonts/font = ExtResource("3_2pax4")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("7_g1ovu")
+theme_override_styles/hover = ExtResource("8_18cj0")
+theme_override_styles/pressed = ExtResource("7_g1ovu")
+theme_override_styles/disabled = ExtResource("9_4vc1f")
+theme_override_styles/focus = ExtResource("7_g1ovu")
+text = "Hire  VP (0)"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MetricLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_ovlj2")
+
+[node name="MetricQuantityLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = SubResource("LabelSettings_ovlj2")
+horizontal_alignment = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="pressed" from="ActionButton" to="." method="_on_action_button_pressed"]
+[connection signal="pressed" from="VIPButton" to="." method="_on_vip_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
