@@ -16,6 +16,8 @@ var approval_delta : float = 0
 @onready var approval_label = %Approval
 @onready var date_label = %DateLabel
 @onready var firing = %Firing
+@onready var add_feature = %AddFeature
+@onready var remove_feature = %RemoveFeature
 
 var months : Array = [
 	"",
@@ -46,23 +48,39 @@ var money : int:
 
 var users : int:
 	set(value):
-		users = value
+		if value < 0:
+			users = 0
+		else:
+			users = value
 		users_label.text = "Users:      " + format_score(value)
-
 
 var brand : float:
 	set(value):
-		brand = value
+		if value < 0.0:
+			brand = 0.0
+		elif value > 100.0:
+			brand = 100.0
+		else:
+			brand = value
 		brand_label.text = "Brand  value:  " + str(value).pad_decimals(2) + "%"
 
 var approval : float:
 	set(value):
-		approval = value
+		if value < 0.0:
+			approval = 0.0
+		elif value > 100.0:
+			approval = 100.0
+		else:
+			approval = value
 		approval_label.text = "Empl.  approval:  " + str(value).pad_decimals(2) + "%"
 
 @export var default_employees : int = 2300
+@export var default_monthly_unique_visits : int = 10000000000
+@export var default_advertisers : int = 100000000
 
 var employees : int
+var visits : int
+var advertisers : int
 
 func format_score(value : int) -> String:
 	var score = str(value)
@@ -79,7 +97,11 @@ func _ready():
 	approval = default_approval
 	current_date = Time.get_unix_time_from_datetime_dict({"year": 2022, "month": 10, "day": 27 })
 	employees = default_employees
+	visits = default_monthly_unique_visits
+	advertisers = default_advertisers
 	firing.default_quantity = default_employees
+	add_feature.default_quantity = default_monthly_unique_visits
+	remove_feature.default_quantity = default_advertisers
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -102,9 +124,73 @@ func _on_timer_timeout():
 func _on_firing_take_action(metric):
 	var firings : int = max(0, employees - metric)
 	employees -= metric
-	money += 50000 * firings
-	approval_delta -= 0.005 * firings
+	money -= 50000 * firings
+	approval -= 0.02
+	approval_delta -= 0.01 * firings
 
 func _on_terms_take_action(metric):
 	money_delta -= 1000000
 	brand_delta -= 0.01
+
+
+func _on_crypto_take_action(metric):
+	money -= 1000000
+	money_delta -= 10000 * metric
+
+
+func _on_add_feature_take_action(metric):
+	var visits_lost : int = max(0, visits - metric)
+	visits = metric
+	money -= 1000 * visits_lost
+	users += 10000
+
+
+func _on_pr_stunt_take_action(metric):
+	users += 10000
+	brand_delta -= 0.00001
+
+func _on_remove_feature_take_action(metric):
+	var advertisers_lost : int = max(0, advertisers - metric)
+	users -= 1000000
+	users_delta += 10000
+	money_delta -= round(advertisers_lost / 10000.0)
+
+
+func _on_public_statement_take_action(metric):
+	users -= 10000
+	brand_delta -= 0.00001
+
+
+func _on_startup_take_action(metric):
+	money -= 100000000
+	approval -= 0.005
+	brand_delta += 0.00002
+
+
+func _on_paywall_take_action(metric):
+	money += 100000
+	money_delta += 10000
+	users_delta -= 100000
+
+
+
+func _on_poll_take_action(metric):
+	users += 100000
+	users_delta += 100000
+	approval_delta -= 0.0005
+	
+
+
+func _on_promise_take_action(metric):
+	users_delta -= 100000
+	brand_delta -= 0.0005
+
+
+
+func _on_dogwhistle_take_action(metric):
+	users += 1000
+	users_delta -= 100000
+	brand_delta -= 0.005
+	money -= 1000000
+	money_delta -= 100000
+	approval -= 0.05

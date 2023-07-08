@@ -192,6 +192,7 @@ metric_name = "Employees"
 default_quantity = 2300
 action_effect = -1
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/GridContainer"]
 layout_mode = 2
@@ -205,6 +206,7 @@ metric_name = "Advertisers"
 default_quantity = 10000
 action_effect = -5
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="Crypto" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
 layout_mode = 2
@@ -214,19 +216,22 @@ vp_name = "CFO"
 metric_name = "Tokens"
 action_effect = 15
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="MarginContainer2" type="MarginContainer" parent="ScrollContainer/GridContainer"]
 layout_mode = 2
 
 [node name="AddFeature" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 action_name = "Add feature"
 vp_name = "CTO"
 metric_name = "Visits"
 default_quantity = 10000000000
-action_effect = -20000
+action_effect = -200000
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="PRStunt" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
 layout_mode = 2
@@ -236,11 +241,13 @@ vp_name = "Comms VP"
 metric_name = "Ratios"
 action_effect = 1
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="MarginContainer3" type="MarginContainer" parent="ScrollContainer/GridContainer"]
 layout_mode = 2
 
 [node name="RemoveFeature" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 action_name = "Remove feature"
@@ -249,6 +256,7 @@ metric_name = "Advertisers"
 default_quantity = 10000
 action_effect = -5
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="PublicStatement" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
 layout_mode = 2
@@ -258,6 +266,7 @@ vp_name = "PR Head"
 metric_name = "Angry analysts"
 action_effect = 12
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="MarginContainer4" type="MarginContainer" parent="ScrollContainer/GridContainer"]
 layout_mode = 2
@@ -270,6 +279,7 @@ vp_name = "R&D Head"
 metric_name = "Assets"
 action_effect = 100000
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="Paywall" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
 layout_mode = 2
@@ -279,11 +289,12 @@ vp_name = "Analytics VP"
 metric_name = "Paying users"
 action_effect = 500
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="MarginContainer5" type="MarginContainer" parent="ScrollContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Startup2" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+[node name="Poll" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
 layout_mode = 2
 size_flags_horizontal = 3
 action_name = "Poll users"
@@ -291,6 +302,7 @@ vp_name = "CM"
 metric_name = "Hate msgs"
 action_effect = 1000
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="Promise" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
 layout_mode = 2
@@ -300,6 +312,7 @@ vp_name = "Intern"
 metric_name = "Broken promises"
 action_effect = 1
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="MarginContainer6" type="MarginContainer" parent="ScrollContainer/GridContainer"]
 layout_mode = 2
@@ -312,6 +325,7 @@ vp_name = "Assistant"
 metric_name = "Nazi counter"
 action_effect = 200
 vp_frequency = 10
+can_quantity_be_negative = false
 
 [node name="pauseMenu" parent="." instance=ExtResource("5_0g02i")]
 visible = false
@@ -330,4 +344,14 @@ texture = ExtResource("7_veo7s")
 
 [connection signal="take_action" from="ScrollContainer/GridContainer/Firing" to="." method="_on_firing_take_action"]
 [connection signal="take_action" from="ScrollContainer/GridContainer/Terms" to="." method="_on_terms_take_action"]
+[connection signal="take_action" from="ScrollContainer/GridContainer/Crypto" to="." method="_on_crypto_take_action"]
+[connection signal="take_action" from="ScrollContainer/GridContainer/AddFeature" to="." method="_on_add_feature_take_action"]
+[connection signal="take_action" from="ScrollContainer/GridContainer/PRStunt" to="." method="_on_pr_stunt_take_action"]
+[connection signal="take_action" from="ScrollContainer/GridContainer/RemoveFeature" to="." method="_on_remove_feature_take_action"]
+[connection signal="take_action" from="ScrollContainer/GridContainer/PublicStatement" to="." method="_on_public_statement_take_action"]
+[connection signal="take_action" from="ScrollContainer/GridContainer/Startup" to="." method="_on_startup_take_action"]
+[connection signal="take_action" from="ScrollContainer/GridContainer/Paywall" to="." method="_on_paywall_take_action"]
+[connection signal="take_action" from="ScrollContainer/GridContainer/Poll" to="." method="_on_poll_take_action"]
+[connection signal="take_action" from="ScrollContainer/GridContainer/Promise" to="." method="_on_promise_take_action"]
+[connection signal="take_action" from="ScrollContainer/GridContainer/Dogwhistle" to="." method="_on_dogwhistle_take_action"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
