@@ -1,7 +1,7 @@
 @tool
 extends VBoxContainer
 
-signal take_action
+signal take_action(metric)
 
 @export var action_name : String
 @export var vp_name : String
@@ -58,4 +58,4 @@ func _on_timer_timeout():
 func take_effect():
 	"""Increase the quantity when enabled manually or automatically"""
 	quantity += action_effect
-	take_action.emit()
+	take_action.emit(quantity)

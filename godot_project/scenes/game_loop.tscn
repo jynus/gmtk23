@@ -1,16 +1,38 @@
-[gd_scene load_steps=13 format=3 uid="uid://b7hyvfmx00g24"]
+[gd_scene load_steps=16 format=3 uid="uid://b7hyvfmx00g24"]
 
 [ext_resource type="Texture2D" uid="uid://bbsai0ufhvr3k" path="res://assets/sprites/graph.png" id="1_1bc68"]
 [ext_resource type="Script" path="res://scripts/game_loop.gd" id="1_ex1d5"]
 [ext_resource type="FontFile" uid="uid://btvwq11pvkgw7" path="res://assets/fonts/minimal5x7.ttf" id="2_qlmu1"]
 [ext_resource type="FontFile" uid="uid://clklxr6keityt" path="res://assets/fonts/basis33.ttf" id="3_70j3y"]
+[ext_resource type="Texture2D" uid="uid://cmcdg2evpdw7o" path="res://assets/sprites/Godot_icon.svg" id="3_bw2js"]
+[ext_resource type="FontFile" uid="uid://c1gg0yw02pyb5" path="res://assets/fonts/dogicapixel.ttf" id="4_1s57y"]
 [ext_resource type="PackedScene" uid="uid://bh71olny4pi0k" path="res://scene_objects/category.tscn" id="4_jkiuj"]
 [ext_resource type="PackedScene" uid="uid://c4724smqdfkk6" path="res://scene_objects/pause_menu.tscn" id="5_0g02i"]
 [ext_resource type="Texture2D" uid="uid://gm6w5or1ko6v" path="res://assets/sprites/arrowdownred.png" id="7_veo7s"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_mo3sh"]
+font = ExtResource("4_1s57y")
+font_size = 8
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_ovlj2"]
 font = ExtResource("2_qlmu1")
 shadow_size = 0
+
+[sub_resource type="Animation" id="Animation_5pp78"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("graph:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 300, 30)]
+}
 
 [sub_resource type="Animation" id="Animation_ny8qm"]
 resource_name = "graph_move"
@@ -29,21 +51,6 @@ tracks/0/keys = {
 "values": [Rect2(0, 0, 300, 30), Rect2(300, 0, 300, 30)]
 }
 
-[sub_resource type="Animation" id="Animation_5pp78"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("graph:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(0, 0, 300, 30)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e754d"]
 _data = {
 "RESET": SubResource("Animation_5pp78"),
@@ -59,45 +66,86 @@ script = ExtResource("1_ex1d5")
 
 [node name="graph" type="Sprite2D" parent="."]
 texture_repeat = 2
-position = Vector2(158, 48)
+position = Vector2(156, 54)
 texture = ExtResource("1_1bc68")
 region_enabled = true
 region_rect = Rect2(0, 0, 300, 30)
 
-[node name="GridContainer" type="GridContainer" parent="."]
-offset_right = 320.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="LogoContainer" type="CenterContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="Logo" type="Sprite2D" parent="HBoxContainer/LogoContainer"]
+position = Vector2(3, 5)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("3_bw2js")
+centered = false
+
+[node name="DateContainer" type="CenterContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/DateContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="DateLabel" type="Label" parent="HBoxContainer/DateContainer/ColorRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+text = "Jul
+8
+2022"
+label_settings = SubResource("LabelSettings_mo3sh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
 columns = 2
 
-[node name="Money" type="Label" parent="GridContainer"]
+[node name="Money" type="Label" parent="HBoxContainer/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Money:  1,000,000,000.00"
+size_flags_vertical = 7
+text = "Money:    1,000,000,000.00"
+label_settings = SubResource("LabelSettings_ovlj2")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Users" type="Label" parent="HBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "Users:    400,000,000"
+label_settings = SubResource("LabelSettings_ovlj2")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Brand" type="Label" parent="HBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "Brand  value:  100.00%"
 label_settings = SubResource("LabelSettings_ovlj2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Users" type="Label" parent="GridContainer"]
+[node name="Approval" type="Label" parent="HBoxContainer/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Users:  400,000,000"
-label_settings = SubResource("LabelSettings_ovlj2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Reputation" type="Label" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Reputation:  Excelent"
-label_settings = SubResource("LabelSettings_ovlj2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Availability" type="Label" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Availability:  99.99999%"
+size_flags_vertical = 7
+text = "Empl.  approval:  100.00%"
 label_settings = SubResource("LabelSettings_ovlj2")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -135,6 +183,7 @@ size_flags_horizontal = 3
 columns = 3
 
 [node name="Firing" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 action_name = "Fire employee"
@@ -147,7 +196,7 @@ vp_frequency = 10
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Container" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
+[node name="Terms" parent="ScrollContainer/GridContainer" instance=ExtResource("4_jkiuj")]
 layout_mode = 2
 size_flags_horizontal = 3
 action_name = "Change terms"
@@ -268,15 +317,17 @@ vp_frequency = 10
 visible = false
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [node name="Arrowdownred" type="Sprite2D" parent="."]
-position = Vector2(13, 5)
+position = Vector2(105, 12)
 texture = ExtResource("7_veo7s")
 
 [node name="Arrowdownred2" type="Sprite2D" parent="."]
-position = Vector2(186, 5)
+position = Vector2(234, 12)
 texture = ExtResource("7_veo7s")
 
 [connection signal="take_action" from="ScrollContainer/GridContainer/Firing" to="." method="_on_firing_take_action"]
+[connection signal="take_action" from="ScrollContainer/GridContainer/Terms" to="." method="_on_terms_take_action"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

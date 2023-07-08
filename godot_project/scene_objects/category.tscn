@@ -47,7 +47,7 @@ theme_override_styles/hover = ExtResource("8_18cj0")
 theme_override_styles/pressed = ExtResource("7_g1ovu")
 theme_override_styles/disabled = ExtResource("9_4vc1f")
 theme_override_styles/focus = ExtResource("7_g1ovu")
-text = "Hire  VP (0)"
+text = "Hire  (0)"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

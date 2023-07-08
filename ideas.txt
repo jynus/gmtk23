@@ -91,6 +91,7 @@ Bad CEO simulator
  * Outage: Say it is a feature: A: down, R:up; on it: 
  * Regime Ban: accept censorship: R:down / fight against cernsorsip: U/A: down
  * Walkouts: fire people: R: down / concede demands: M: down
+ * Possibility of outsource: E: down / 
  
  - Despedir empleados -> recibir denuncias 
  - Cargarte features
