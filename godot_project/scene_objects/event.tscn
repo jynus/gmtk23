@@ -1,0 +1,107 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0687tcbf14ac"]
+
+[ext_resource type="Script" path="res://scripts/event.gd" id="1_5yskp"]
+[ext_resource type="FontFile" uid="uid://dchaxun0duwqd" path="res://assets/fonts/Berlin Sans FB Demi Bold.ttf" id="2_o6gg5"]
+[ext_resource type="Texture2D" uid="uid://qbxjx8w8ke10" path="res://assets/sprites/twitter.png" id="3_js4co"]
+[ext_resource type="FontFile" uid="uid://clklxr6keityt" path="res://assets/fonts/basis33.ttf" id="4_74880"]
+[ext_resource type="FontFile" uid="uid://btvwq11pvkgw7" path="res://assets/fonts/minimal5x7.ttf" id="5_cthob"]
+
+[node name="event" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5yskp")
+title_text = "Evento"
+image_name = "twitter.png"
+description_text = "Some event happened."
+left_button_text = "Do something"
+right_button_text = "Do nothing"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0.435294, 0, 0.435294, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Label" parent="ColorRect/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 20)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_o6gg5")
+theme_override_font_sizes/font_size = 20
+text = "Evento"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(320, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="image" type="Sprite2D" parent="ColorRect/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+position = Vector2(162, 18.5)
+texture = ExtResource("3_js4co")
+
+[node name="description" type="RichTextLabel" parent="ColorRect/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("4_74880")
+bbcode_enabled = true
+text = "[center]Something happened[/center]"
+
+[node name="interaction" type="GridContainer" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="left_text" type="RichTextLabel" parent="ColorRect/VBoxContainer/interaction"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("5_cthob")
+bbcode_enabled = true
+text = "[left]Do option 1[/left]"
+
+[node name="right_text" type="RichTextLabel" parent="ColorRect/VBoxContainer/interaction"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("5_cthob")
+bbcode_enabled = true
+text = "[right]Do option 2[/right]"
+
+[node name="leftButton" type="Button" parent="ColorRect/VBoxContainer/interaction"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_cthob")
+theme_override_font_sizes/font_size = 16
+text = "Chose option 1"
+
+[node name="rightButton" type="Button" parent="ColorRect/VBoxContainer/interaction"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_cthob")
+theme_override_font_sizes/font_size = 16
+text = "Chose option 2"
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/interaction/leftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/interaction/rightButton" to="." method="_on_right_button_pressed"]

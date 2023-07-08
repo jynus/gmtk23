@@ -6,7 +6,7 @@ extends Node2D
 @export var default_approval : float = 100
 
 var money_delta : int = -400000
-var users_delta : int = -10000
+var users_delta : int = -20000
 var brand_delta : float = 0
 var approval_delta : float = 0
 
@@ -18,6 +18,7 @@ var approval_delta : float = 0
 @onready var firing = %Firing
 @onready var add_feature = %AddFeature
 @onready var remove_feature = %RemoveFeature
+@onready var event = %event
 
 var months : Array = [
 	"",
@@ -44,7 +45,7 @@ var current_date : int:
 var money : int:
 	set(value):
 		money = value
-		money_label.text = "Money:    $" + format_score(value)
+		money_label.text = "Money:    $" + format_score(money)
 
 var users : int:
 	set(value):
@@ -52,7 +53,7 @@ var users : int:
 			users = 0
 		else:
 			users = value
-		users_label.text = "Users:      " + format_score(value)
+		users_label.text = "Users:      " + format_score(users)
 
 var brand : float:
 	set(value):
@@ -62,7 +63,7 @@ var brand : float:
 			brand = 100.0
 		else:
 			brand = value
-		brand_label.text = "Brand  value:  " + str(value).pad_decimals(2) + "%"
+		brand_label.text = "Brand  value:  " + str(brand).pad_decimals(2) + "%"
 
 var approval : float:
 	set(value):
@@ -72,7 +73,7 @@ var approval : float:
 			approval = 100.0
 		else:
 			approval = value
-		approval_label.text = "Empl.  approval:  " + str(value).pad_decimals(2) + "%"
+		approval_label.text = "Empl.  approval:  " + str(approval).pad_decimals(2) + "%"
 
 @export var default_employees : int = 2300
 @export var default_monthly_unique_visits : int = 10000000000
@@ -116,6 +117,29 @@ func _on_timer_timeout():
 	approval += approval_delta
 	# next day
 	current_date += 60 * 60 * 24
+	var date = Time.get_date_dict_from_unix_time(current_date)
+	if date.year == 2022 and date.month == 10 and date.day == 28:
+		old_CEO_firing_event()
+
+
+func old_CEO_firing_event():
+	event.title_text = "What do we do about the old CEO?"
+	event.image_name = "old_ceo.png"
+	event.description_text = """You just arrive to Twitter. The current CEO
+	is waiting for you, what should you do next?"""
+	event.left_button_text = "Fire him immediately"
+	event.right_button_text = "Humiliate him publicly, then ghosting him"
+	event.show()
+	get_tree().paused = true
+
+	event.connect("chose_option", func(option):
+		if option == event.left_button_text:
+			print("left")
+		else:
+			print("right")
+		event.hide()
+		get_tree().paused = false
+	)
 
 ####################################
 # logic for when buttons are pressed
@@ -125,8 +149,8 @@ func _on_firing_take_action(metric):
 	var firings : int = max(0, employees - metric)
 	employees -= metric
 	money -= 50000 * firings
-	approval -= 0.02
-	approval_delta -= 0.01 * firings
+	approval -= 0.03
+	approval_delta -= 0.02 * firings
 
 func _on_terms_take_action(metric):
 	money_delta -= 1000000
@@ -176,7 +200,7 @@ func _on_paywall_take_action(metric):
 
 func _on_poll_take_action(metric):
 	users += 100000
-	users_delta += 100000
+	users_delta += 10000
 	approval_delta -= 0.0005
 	
 

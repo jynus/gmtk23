@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7hyvfmx00g24"]
+[gd_scene load_steps=17 format=3 uid="uid://b7hyvfmx00g24"]
 
 [ext_resource type="Texture2D" uid="uid://bbsai0ufhvr3k" path="res://assets/sprites/graph.png" id="1_1bc68"]
 [ext_resource type="Script" path="res://scripts/game_loop.gd" id="1_ex1d5"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bh71olny4pi0k" path="res://scene_objects/category.tscn" id="4_jkiuj"]
 [ext_resource type="PackedScene" uid="uid://c4724smqdfkk6" path="res://scene_objects/pause_menu.tscn" id="5_0g02i"]
 [ext_resource type="Texture2D" uid="uid://gm6w5or1ko6v" path="res://assets/sprites/arrowdownred.png" id="7_veo7s"]
+[ext_resource type="PackedScene" uid="uid://c0687tcbf14ac" path="res://scene_objects/event.tscn" id="9_0omy2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mo3sh"]
 font = ExtResource("4_1s57y")
@@ -327,9 +328,6 @@ action_effect = 200
 vp_frequency = 10
 can_quantity_be_negative = false
 
-[node name="pauseMenu" parent="." instance=ExtResource("5_0g02i")]
-visible = false
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
@@ -341,6 +339,16 @@ texture = ExtResource("7_veo7s")
 [node name="Arrowdownred2" type="Sprite2D" parent="."]
 position = Vector2(234, 12)
 texture = ExtResource("7_veo7s")
+
+[node name="pauseMenu" parent="." instance=ExtResource("5_0g02i")]
+visible = false
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="event" parent="." instance=ExtResource("9_0omy2")]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
 
 [connection signal="take_action" from="ScrollContainer/GridContainer/Firing" to="." method="_on_firing_take_action"]
 [connection signal="take_action" from="ScrollContainer/GridContainer/Terms" to="." method="_on_terms_take_action"]
