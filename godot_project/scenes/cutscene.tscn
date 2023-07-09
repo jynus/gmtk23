@@ -1,0 +1,169 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0gyqyxa1r5mi"]
+
+[ext_resource type="Script" path="res://scripts/cutscene.gd" id="1_sntmk"]
+[ext_resource type="Texture2D" uid="uid://wvvxjl5y5xyd" path="res://assets/sprites/icon.png" id="2_vku8q"]
+[ext_resource type="FontFile" uid="uid://clklxr6keityt" path="res://assets/fonts/basis33.ttf" id="3_ycp75"]
+[ext_resource type="Texture2D" uid="uid://c0pfmv20n8fx1" path="res://assets/sprites/lawyer.png" id="4_c8vuh"]
+
+[sub_resource type="Animation" id="Animation_3qnwx"]
+resource_name = "cutscene"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dialog1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dialog1/text1:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 8.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dialog2/text1:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(10, 18),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(20),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"load_gameplay"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7n8j5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dialog1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dialog1/text1:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dialog2/text1:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y18wd"]
+_data = {
+"RESET": SubResource("Animation_7n8j5"),
+"cutscene": SubResource("Animation_3qnwx")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sntmk")
+
+[node name="Dialog2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="Icon" type="Sprite2D" parent="Dialog2"]
+position = Vector2(164, 67)
+texture = ExtResource("2_vku8q")
+
+[node name="text1" type="RichTextLabel" parent="Dialog2"]
+offset_left = 51.0
+offset_top = 115.0
+offset_right = 273.0
+offset_bottom = 179.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_ycp75")
+bbcode_enabled = true
+text = "Of course! The first thing I am going to do as CEO of [color=blue]Chirper[/color] is... [color=red]to destroy it![/color]
+Buah hah ha ha!!!!"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Dialog1" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="Lawyer" type="Sprite2D" parent="Dialog1"]
+position = Vector2(156, 47)
+texture = ExtResource("4_c8vuh")
+
+[node name="text1" type="RichTextLabel" parent="Dialog1"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 115.0
+offset_right = 305.0
+offset_bottom = 179.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_ycp75")
+bbcode_enabled = true
+text = "Congratulations, Mr. Tusk, your 44 billion dollars made you the sole owner of [color=blue]Chirper[/color]. Do you know what are you going to do now?"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "cutscene"
+libraries = {
+"": SubResource("AnimationLibrary_y18wd")
+}
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
