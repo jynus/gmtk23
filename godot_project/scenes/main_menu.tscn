@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://b7fkndcm0e336" path="res://scene_objects/settings.tscn" id="11_5pplk"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w1xgv"]
-load_path = "res://.godot/imported/title2.png-fc580a2487e61cc1f6802163a40306e9.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_crri5"]
 font = ExtResource("4_i0pv0")
