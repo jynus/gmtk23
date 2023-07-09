@@ -2,9 +2,11 @@ extends Node
 
 @onready var music_player : AudioStreamPlayer = %musicPlayer
 var playlist : Dictionary = {
-	"menu": preload("res://assets/music/Bit Bit Loop.mp3"),
-	"pause": preload("res://assets/music/Winter Reflections.mp3"),
-	"game": preload("res://assets/music/Amazing Plan.mp3")
+	"menu": preload("res://assets/music/ES_Deep Down Diamond Alley - Josef Bel Habib.mp3"),
+	"pause": preload("res://assets/music/ES_A Heart Made of Pixels - Christoffer Moe Ditlevsen.mp3"),
+	"game": preload("res://assets/music/ES_Play Me Like That Video Game - Josef Bel Habib.mp3"),
+	"event": preload("res://assets/music/ES_Time to Level Up - Josef Bel Habib.mp3"),
+	"gameover": preload("res://assets/music/ES_Back to Business - William Benckert.mp3")
 }
 var _current_song : String
 @export var current_song : String :
@@ -18,7 +20,7 @@ func _set_current_song(value):
 	music_player.stream = playlist[current_song]
 
 func _ready():
-	music_player.volume_db = -20
+	music_player.volume_db = -10
 
 func _process(_delta):
 	pass

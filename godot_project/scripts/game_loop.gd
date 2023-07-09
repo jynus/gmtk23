@@ -1,11 +1,12 @@
 extends Node2D
 
-@export var default_money : int = 44000000000
-@export var default_users : int = 400000000
+@export var default_money : float = 44000000000
+@export var default_users : int = 300000000
 @export var default_brand : float = 100
 @export var default_approval : float = 100
+@export var default_date : int = Time.get_unix_time_from_datetime_dict({"year": 2022, "month": 10, "day": 27 })
 
-var money_delta : int = -400000
+var money_delta : float = -400000
 var users_delta : int = -20000
 var brand_delta : float = 0
 var approval_delta : float = 0
@@ -18,7 +19,8 @@ var approval_delta : float = 0
 @onready var firing = %Firing
 @onready var add_feature = %AddFeature
 @onready var remove_feature = %RemoveFeature
-@onready var event = %event
+@onready var event_screen = %event
+@onready var game_over_screen = %game_over
 
 var months : Array = [
 	"",
@@ -42,10 +44,10 @@ var current_date : int:
 		var date = Time.get_date_dict_from_unix_time(current_date)
 		date_label.text = months[date["month"]] + "\n" + str(date["day"]) + "\n" + str(date["year"])
 
-var money : int:
+var money : float:
 	set(value):
 		money = value
-		money_label.text = "Money:    $" + format_score(money)
+		money_label.metric = money
 
 var users : int:
 	set(value):
@@ -53,7 +55,7 @@ var users : int:
 			users = 0
 		else:
 			users = value
-		users_label.text = "Users:      " + format_score(users)
+		users_label.metric = users
 
 var brand : float:
 	set(value):
@@ -63,7 +65,7 @@ var brand : float:
 			brand = 100.0
 		else:
 			brand = value
-		brand_label.text = "Brand  value:  " + str(brand).pad_decimals(2) + "%"
+		brand_label.metric = brand
 
 var approval : float:
 	set(value):
@@ -73,7 +75,7 @@ var approval : float:
 			approval = 100.0
 		else:
 			approval = value
-		approval_label.text = "Empl.  approval:  " + str(approval).pad_decimals(2) + "%"
+		approval_label.metric = approval
 
 @export var default_employees : int = 2300
 @export var default_monthly_unique_visits : int = 10000000000
@@ -82,6 +84,15 @@ var approval : float:
 var employees : int
 var visits : int
 var advertisers : int
+var tokens : int
+var assets : int
+var angry_regulators : int = 0
+
+var events : Array = []
+var music_offset : float = 0
+var rng : RandomNumberGenerator = RandomNumberGenerator.new()
+@onready var actions = $ScrollContainer/GridContainer.find_children("", "VBoxContainer", false)
+var hired_vps : Array = []
 
 func format_score(value : int) -> String:
 	var score = str(value)
@@ -91,12 +102,16 @@ func format_score(value : int) -> String:
 		i = i - 3
 	return score
 
+#########################################################
+# ready function
+#########################################################
+
 func _ready():
 	money = default_money
 	users = default_users
 	brand = default_brand
 	approval = default_approval
-	current_date = Time.get_unix_time_from_datetime_dict({"year": 2022, "month": 10, "day": 27 })
+	current_date = default_date
 	employees = default_employees
 	visits = default_monthly_unique_visits
 	advertisers = default_advertisers
@@ -104,11 +119,40 @@ func _ready():
 	add_feature.default_quantity = default_monthly_unique_visits
 	remove_feature.default_quantity = default_advertisers
 	
+	#setup events
+	events = [
+		old_ceo_event.new(),
+		bankrupt.new(),
+		no_users.new(),
+		ruined_brand.new(),
+		zero_approval.new(),
+		money_sinkhole.new(),
+		token_scam.new(),
+		ousted_from_board.new(),
+		eu_regulators.new(),
+		everything_zero.new()
+	]
+	BackgroundMusic.play_song("game")
+	rng.randomize()
+	for action in actions:
+		action.connect("hired_vp", hired_vp)
+
+
+func hired_vp(action):
+	hired_vps.append(action)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+func disable_tokens():
+	%Crypto.disable()
+
+func disable_investments():
+	%Startup.disable()
+
+func disable_terms():
+	%Terms.disable()
 
 func _on_timer_timeout():
 	money += money_delta
@@ -118,28 +162,41 @@ func _on_timer_timeout():
 	# next day
 	current_date += 60 * 60 * 24
 	var date = Time.get_date_dict_from_unix_time(current_date)
-	if date.year == 2022 and date.month == 10 and date.day == 28:
-		old_CEO_firing_event()
+	
+	# check for events
+	for event in events:
+		if (event.multiple_triggers or event.num_triggers == 0) and event.check_condition(self):
+			show_event(event)
+			return
 
-
-func old_CEO_firing_event():
-	event.title_text = "What do we do about the old CEO?"
-	event.image_name = "old_ceo.png"
-	event.description_text = """You just arrive to Twitter. The current CEO
-	is waiting for you, what should you do next?"""
-	event.left_button_text = "Fire him immediately"
-	event.right_button_text = "Humiliate him publicly, then ghosting him"
-	event.show()
+func show_event(event):
+	music_offset = BackgroundMusic.stop()
+	BackgroundMusic.play_song("event")
+	event_screen.title_text = event.title
+	event_screen.image_name = event.image_name
+	event_screen.description_text = event.description
+	event_screen.left_button_text = event.left_option
+	event_screen.right_button_text = event.right_option
+	event_screen.show()
+	event.num_triggers += 1
 	get_tree().paused = true
 
-	event.connect("chose_option", func(option):
-		if option == event.left_button_text:
-			print("left")
-		else:
-			print("right")
-		event.hide()
+	event_screen.connect("chose_option", func(option):
+		if option == event_screen.left_button_text:
+			event.effect_left_option(self)
+		elif option == event_screen.right_button_text:
+			event.effect_right_option(self)
+		event_screen.hide()
 		get_tree().paused = false
+		BackgroundMusic.play_song("game", music_offset)
 	)
+
+func game_over():
+	BackgroundMusic.play_song("gameover")
+	var days : int = (current_date - default_date) / (3600 * 24)
+	game_over_screen.show_game_over(days, money, users, brand, approval)
+	game_over_screen.show()
+	get_tree().paused = true
 
 ####################################
 # logic for when buttons are pressed
@@ -147,17 +204,23 @@ func old_CEO_firing_event():
 
 func _on_firing_take_action(metric):
 	var firings : int = max(0, employees - metric)
-	employees -= metric
+	employees = metric
 	money -= 50000 * firings
-	approval -= 0.03
+	approval -= 0.005
 	approval_delta -= 0.02 * firings
+	var hired_vps_num : int = hired_vps.size()
+	if  hired_vps_num > 0 and rng.randf() < (0.01 * hired_vps_num):
+		print("fire_vp")
+		show_event(fire_vp.new())
 
 func _on_terms_take_action(metric):
-	money_delta -= 1000000
+	angry_regulators = metric
+	money_delta += 1000
 	brand_delta -= 0.01
 
 
 func _on_crypto_take_action(metric):
+	tokens = metric
 	money -= 1000000
 	money_delta -= 10000 * metric
 
@@ -166,7 +229,7 @@ func _on_add_feature_take_action(metric):
 	var visits_lost : int = max(0, visits - metric)
 	visits = metric
 	money -= 1000 * visits_lost
-	users += 10000
+	users += 100000
 
 
 func _on_pr_stunt_take_action(metric):
@@ -186,6 +249,7 @@ func _on_public_statement_take_action(metric):
 
 
 func _on_startup_take_action(metric):
+	assets = metric
 	money -= 100000000
 	approval -= 0.005
 	brand_delta += 0.00002
@@ -194,7 +258,7 @@ func _on_startup_take_action(metric):
 func _on_paywall_take_action(metric):
 	money += 100000
 	money_delta += 10000
-	users_delta -= 100000
+	users_delta -= 10000
 
 
 
@@ -212,9 +276,9 @@ func _on_promise_take_action(metric):
 
 
 func _on_dogwhistle_take_action(metric):
-	users += 1000
+	users += 100
 	users_delta -= 100000
-	brand_delta -= 0.005
+	brand_delta -= 0.01
 	money -= 1000000
 	money_delta -= 100000
 	approval -= 0.05

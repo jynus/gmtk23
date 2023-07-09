@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://0acm54r4jmcq"]
+
+[ext_resource type="FontFile" uid="uid://btvwq11pvkgw7" path="res://assets/fonts/minimal5x7.ttf" id="1_8hh0j"]
+[ext_resource type="Script" path="res://scripts/metric.gd" id="2_mmq8d"]
+[ext_resource type="Texture2D" uid="uid://gm6w5or1ko6v" path="res://assets/sprites/arrowdownred.png" id="3_mbho0"]
+[ext_resource type="Texture2D" uid="uid://baktsbsg47wvx" path="res://assets/sprites/arrowupgreen.png" id="4_63lgn"]
+[ext_resource type="Texture2D" uid="uid://b4vrr8gjw7cyb" path="res://assets/sprites/equalsign.png" id="4_wbba8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ebl48"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mbho0")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_wbba8")
+}],
+"loop": true,
+"name": &"equal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_63lgn")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ovlj2"]
+font = ExtResource("1_8hh0j")
+shadow_size = 0
+
+[node name="HBoxContainer" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("2_mmq8d")
+
+[node name="arrow" type="AnimatedSprite2D" parent="."]
+position = Vector2(-6, 5)
+sprite_frames = SubResource("SpriteFrames_ebl48")
+animation = &"equal"
+autoplay = "equal"
+
+[node name="Metric" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Brand  value:  100.00%"
+label_settings = SubResource("LabelSettings_ovlj2")
+horizontal_alignment = 1
+vertical_alignment = 1

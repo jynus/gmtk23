@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b326ovwmj62hf"]
+[gd_scene load_steps=16 format=3 uid="uid://b326ovwmj62hf"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_v40wr"]
 [ext_resource type="LabelSettings" uid="uid://csrb5ilr7y6dy" path="res://resources/main_menu_title_label_setting.tres" id="2_ckptl"]
@@ -6,11 +6,19 @@
 [ext_resource type="FontFile" uid="uid://caj4jhhpy0ha7" path="res://assets/fonts/dogicabold.ttf" id="3_5e6s0"]
 [ext_resource type="StyleBox" uid="uid://67m76h2nyeyy" path="res://resources/main_menu_button_style.tres" id="3_b61lj"]
 [ext_resource type="FontFile" uid="uid://160hm44pryh4" path="res://assets/fonts/dogica.ttf" id="3_xem84"]
+[ext_resource type="FontFile" uid="uid://csfgtka180pkw" path="res://assets/fonts/dogicapixelbold.ttf" id="4_i0pv0"]
 [ext_resource type="StyleBox" uid="uid://cscwrtv4vl12l" path="res://resources/main_menu_button_hover_style.tres" id="4_kcoe6"]
 [ext_resource type="StyleBox" uid="uid://dtfd366g1j00" path="res://resources/main_menu_button_pressed_style.tres" id="5_hqrxp"]
 [ext_resource type="FontFile" uid="uid://c1gg0yw02pyb5" path="res://assets/fonts/dogicapixel.ttf" id="7_4bt73"]
 [ext_resource type="PackedScene" uid="uid://dg8iotoxg8rsy" path="res://scene_objects/blip.tscn" id="10_erdpa"]
 [ext_resource type="PackedScene" uid="uid://b7fkndcm0e336" path="res://scene_objects/settings.tscn" id="11_5pplk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_crri5"]
+font = ExtResource("4_i0pv0")
+font_size = 8
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eypyq"]
 bg_color = Color(0, 0, 0, 0)
@@ -55,6 +63,12 @@ label_settings = ExtResource("2_ckptl")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Subtitle" type="Label" parent="menuContainer"]
+layout_mode = 2
+text = "subtitle"
+label_settings = SubResource("LabelSettings_crri5")
+horizontal_alignment = 1
+
 [node name="optionsContainer" type="HBoxContainer" parent="menuContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -69,7 +83,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="topMargin" type="MarginContainer" parent="menuContainer/optionsContainer/buttonsContainer"]
-custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="PlayButton" type="Button" parent="menuContainer/optionsContainer/buttonsContainer"]

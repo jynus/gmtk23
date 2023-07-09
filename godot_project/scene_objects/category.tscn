@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bh71olny4pi0k"]
+[gd_scene load_steps=20 format=3 uid="uid://bh71olny4pi0k"]
 
 [ext_resource type="FontFile" uid="uid://clklxr6keityt" path="res://assets/fonts/basis33.ttf" id="1_3dqjg"]
 [ext_resource type="Script" path="res://scripts/category.gd" id="1_qdypa"]
@@ -10,6 +10,8 @@
 [ext_resource type="StyleBox" uid="uid://b2uswr51sch7b" path="res://resources/category_button_2_normal.tres" id="7_g1ovu"]
 [ext_resource type="StyleBox" uid="uid://dtck8a034qryq" path="res://resources/category_button_2_hover.tres" id="8_18cj0"]
 [ext_resource type="StyleBox" uid="uid://cc488ooqjefkq" path="res://resources/category_button_2_disabled.tres" id="9_4vc1f"]
+[ext_resource type="AudioStream" uid="uid://38nbcwarx60o" path="res://assets/sfx/click_button.wav" id="11_bpv81"]
+[ext_resource type="AudioStream" uid="uid://x02j3mej6g1i" path="res://assets/sfx/cash_register.wav" id="12_f8eav"]
 
 [sub_resource type="Theme" id="Theme_h5mdv"]
 default_font = ExtResource("2_huxq7")
@@ -23,6 +25,21 @@ bg_color = Color(0.890196, 0.396078, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_ovlj2"]
 font = ExtResource("1_3dqjg")
 shadow_size = 0
+
+[sub_resource type="Animation" id="Animation_yomj1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProgressBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_6877f"]
 resource_name = "ongoing"
@@ -55,21 +72,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_yomj1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ProgressBar:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cgk1g"]
 _data = {
 "RESET": SubResource("Animation_yomj1"),
@@ -80,11 +82,11 @@ _data = {
 offset_right = 141.0
 offset_bottom = 75.0
 script = ExtResource("1_qdypa")
-can_quantity_be_negative = null
 
 [node name="ActionButton" type="Button" parent="."]
 custom_minimum_size = Vector2(141, 24)
 layout_mode = 2
+focus_mode = 0
 theme = SubResource("Theme_h5mdv")
 theme_override_fonts/font = ExtResource("3_2pax4")
 theme_override_font_sizes/font_size = 16
@@ -97,6 +99,7 @@ theme_override_styles/focus = ExtResource("4_rqjul")
 [node name="VIPButton" type="Button" parent="."]
 custom_minimum_size = Vector2(141, 24)
 layout_mode = 2
+focus_mode = 0
 theme = SubResource("Theme_h5mdv")
 theme_override_fonts/font = ExtResource("3_2pax4")
 theme_override_font_sizes/font_size = 16
@@ -120,7 +123,6 @@ size_flags_vertical = 3
 [node name="MetricLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Metric"
 label_settings = SubResource("LabelSettings_ovlj2")
 
 [node name="MetricQuantityLabel" type="Label" parent="HBoxContainer"]
@@ -131,9 +133,25 @@ label_settings = SubResource("LabelSettings_ovlj2")
 horizontal_alignment = 2
 
 [node name="Progress" type="AnimationPlayer" parent="."]
+speed_scale = 0.0
 libraries = {
 "": SubResource("AnimationLibrary_cgk1g")
 }
 
+[node name="EnabledTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+
+[node name="actionClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_bpv81")
+volume_db = -5.0
+bus = &"sfx"
+
+[node name="VPClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_f8eav")
+volume_db = -5.0
+bus = &"sfx"
+
 [connection signal="pressed" from="ActionButton" to="." method="_on_action_button_pressed"]
 [connection signal="pressed" from="VIPButton" to="." method="_on_vip_button_pressed"]
+[connection signal="timeout" from="EnabledTimer" to="." method="_on_enabled_timer_timeout"]

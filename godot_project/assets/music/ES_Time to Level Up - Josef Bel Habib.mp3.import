@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cbkjetydu5qqb"
+path="res://.godot/imported/ES_Time to Level Up - Josef Bel Habib.mp3-b67151b77845a352d00e0e802a70f3c0.mp3str"
+
+[deps]
+
+source_file="res://assets/music/ES_Time to Level Up - Josef Bel Habib.mp3"
+dest_files=["res://.godot/imported/ES_Time to Level Up - Josef Bel Habib.mp3-b67151b77845a352d00e0e802a70f3c0.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

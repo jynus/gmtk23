@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://m3oif1he1vb0"
+path="res://.godot/imported/ES_Deep Down Diamond Alley - Josef Bel Habib.mp3-2cad89016cc9a4e97f9a5b58d5fff287.mp3str"
+
+[deps]
+
+source_file="res://assets/music/ES_Deep Down Diamond Alley - Josef Bel Habib.mp3"
+dest_files=["res://.godot/imported/ES_Deep Down Diamond Alley - Josef Bel Habib.mp3-2cad89016cc9a4e97f9a5b58d5fff287.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

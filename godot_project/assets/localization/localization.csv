@@ -1,6 +1,7 @@
 keys,en,es
-GameTitle,English Title,Título
-VersionString,v0.0.1,v0.0.1
+GameTitle,Chirper,Chirper
+subtitle,Pelon Tusk simulator,Simulador de Pelon Tusk
+VersionString,v1.0.0,v1.0.0
 Play,Play,Jugar
 Settings,Settings,Configuración
 Credits,Credits,Créditos

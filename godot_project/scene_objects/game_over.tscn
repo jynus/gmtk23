@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=3 uid="uid://x4ch5d8j31so"]
+
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_8s5l1"]
+[ext_resource type="FontFile" uid="uid://dchaxun0duwqd" path="res://assets/fonts/Berlin Sans FB Demi Bold.ttf" id="2_pd06u"]
+[ext_resource type="FontFile" uid="uid://clklxr6keityt" path="res://assets/fonts/basis33.ttf" id="3_pr3j3"]
+[ext_resource type="FontFile" uid="uid://caj4jhhpy0ha7" path="res://assets/fonts/dogicabold.ttf" id="4_d6ity"]
+[ext_resource type="Texture2D" uid="uid://ccoheiaoopfg5" path="res://assets/sprites/boton02.png" id="5_xkaqv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pbah8"]
+texture = ExtResource("5_xkaqv")
+
+[node name="game_over" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8s5l1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0.129412, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_pd06u")
+theme_override_font_sizes/font_size = 30
+text = "YOU LOSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GameScores" type="RichTextLabel" parent="ColorRect/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(105, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_pr3j3")
+theme_override_fonts/bold_font = ExtResource("4_d6ity")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center][u]YOUR SCORE[/u]
+123
+-1,995,999,999
+1,000
+0.00 %
+0.16 %[/center]"
+
+[node name="Names" type="RichTextLabel" parent="ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_pr3j3")
+theme_override_fonts/bold_font = ExtResource("4_d6ity")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]
+Days as a CEO
+ Money
+ Users
+ Brand
+ Empl. support[/center]"
+
+[node name="HighScores" type="RichTextLabel" parent="ColorRect/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(105, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_pr3j3")
+theme_override_fonts/bold_font = ExtResource("4_d6ity")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center][u]HIGH SCORES[/u]
+20
+-99,995,999,999
+0,000
+0.00 %
+0.00 %
+[/center]"
+
+[node name="MenuButton" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_pd06u")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxTexture_pbah8")
+text = "Back to menu"
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

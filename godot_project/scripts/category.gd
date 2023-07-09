@@ -2,6 +2,8 @@
 extends VBoxContainer
 
 signal take_action(metric)
+signal hired_vp(action)
+signal fired_vp(action)
 
 @export var action_name : String
 @export var vp_name : String
@@ -15,6 +17,10 @@ signal take_action(metric)
 @onready var quantity_label = $HBoxContainer/MetricQuantityLabel
 @onready var vip_button = $VIPButton
 @onready var progress = $Progress
+@onready var enabled_timer = $EnabledTimer
+@onready var vp_click = $VPClick
+@onready var action_click = $actionClick
+@onready var action_button = $ActionButton
 
 
 var quantity : int:
@@ -53,13 +59,34 @@ func _process(delta):
 	pass
 
 func _on_action_button_pressed():
+	action_click.play()
 	take_effect()
 
 func _on_vip_button_pressed():
+	vp_click.play()
 	vips += 1
+	hired_vp.emit(self)
+
+func fire_vp():
+	vips = 0
+	fired_vp.emit(self)
+	vip_button.disabled = true
+	enabled_timer.start()
+
+func disable():
+	vip_button.disabled = true
+	action_button.disabled = true
+	if vips > 0:
+		fire_vp()
+	enabled_timer.stop()
+	progress.stop()
 
 func take_effect():
 	"""Increase the quantity when enabled manually or automatically"""
 	quantity += action_effect
 	take_action.emit(quantity)
 
+
+func _on_enabled_timer_timeout():
+	print("hiring for " + vp_name + " enabled")
+	vip_button.disabled = false

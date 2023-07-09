@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0687tcbf14ac"]
+[gd_scene load_steps=8 format=3 uid="uid://c0687tcbf14ac"]
 
 [ext_resource type="Script" path="res://scripts/event.gd" id="1_5yskp"]
+[ext_resource type="PackedScene" uid="uid://k635iu86fy37" path="res://scene_objects/menu_background.tscn" id="2_mrb86"]
 [ext_resource type="FontFile" uid="uid://dchaxun0duwqd" path="res://assets/fonts/Berlin Sans FB Demi Bold.ttf" id="2_o6gg5"]
-[ext_resource type="Texture2D" uid="uid://qbxjx8w8ke10" path="res://assets/sprites/twitter.png" id="3_js4co"]
+[ext_resource type="Texture2D" uid="uid://6o58r502oe6v" path="res://assets/sprites/old_ceo.png" id="3_fipq1"]
 [ext_resource type="FontFile" uid="uid://clklxr6keityt" path="res://assets/fonts/basis33.ttf" id="4_74880"]
 [ext_resource type="FontFile" uid="uid://btvwq11pvkgw7" path="res://assets/fonts/minimal5x7.ttf" id="5_cthob"]
+[ext_resource type="FontFile" uid="uid://c1gg0yw02pyb5" path="res://assets/fonts/dogicapixel.ttf" id="6_e52ql"]
 
 [node name="event" type="Control"]
 layout_mode = 3
@@ -20,11 +22,14 @@ description_text = "Some event happened."
 left_button_text = "Do something"
 right_button_text = "Do nothing"
 
+[node name="backgroudMenu" parent="." instance=ExtResource("2_mrb86")]
+self_modulate = Color(0.968627, 0.572549, 1, 1)
+
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 180.0
-color = Color(0.435294, 0, 0.435294, 1)
+color = Color(0.435294, 0, 0.435294, 0.827451)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
 custom_minimum_size = Vector2(320, 180)
@@ -35,31 +40,43 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
 [node name="title" type="Label" parent="ColorRect/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 20)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_o6gg5")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 text = "Evento"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="ColorRect/VBoxContainer"]
-custom_minimum_size = Vector2(320, 40)
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
 
-[node name="image" type="Sprite2D" parent="ColorRect/VBoxContainer/CenterContainer"]
+[node name="image" type="Sprite2D" parent="ColorRect/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-position = Vector2(162, 18.5)
-texture = ExtResource("3_js4co")
+position = Vector2(56, 46)
+texture = ExtResource("3_fipq1")
+region_enabled = true
+region_rect = Rect2(0, 0, 80, 80)
 
-[node name="description" type="RichTextLabel" parent="ColorRect/VBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 87)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(1, 1, 1, 0)
+
+[node name="description" type="RichTextLabel" parent="ColorRect/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("4_74880")
 bbcode_enabled = true
@@ -75,33 +92,42 @@ columns = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_fonts/normal_font = ExtResource("5_cthob")
+theme_override_fonts/normal_font = ExtResource("6_e52ql")
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[left]Do option 1[/left]"
+scroll_active = false
 
 [node name="right_text" type="RichTextLabel" parent="ColorRect/VBoxContainer/interaction"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_fonts/normal_font = ExtResource("5_cthob")
+theme_override_fonts/normal_font = ExtResource("6_e52ql")
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[right]Do option 2[/right]"
+scroll_active = false
 
 [node name="leftButton" type="Button" parent="ColorRect/VBoxContainer/interaction"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
+size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("5_cthob")
 theme_override_font_sizes/font_size = 16
-text = "Chose option 1"
+text = "Choose option 1"
 
 [node name="rightButton" type="Button" parent="ColorRect/VBoxContainer/interaction"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
+size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("5_cthob")
 theme_override_font_sizes/font_size = 16
-text = "Chose option 2"
+text = "Choose option 2"
+
+[node name="MarginContainer2" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
 
 [connection signal="pressed" from="ColorRect/VBoxContainer/interaction/leftButton" to="." method="_on_left_button_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/interaction/rightButton" to="." method="_on_right_button_pressed"]
