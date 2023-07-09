@@ -80,7 +80,7 @@ Days as a CEO
  Money
  Users
  Brand
- Empl. support[/center]"
+ Empl. approve[/center]"
 
 [node name="HighScores" type="RichTextLabel" parent="ColorRect/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true

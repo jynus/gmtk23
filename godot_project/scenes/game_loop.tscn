@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://b7hyvfmx00g24"]
+[gd_scene load_steps=20 format=3 uid="uid://b7hyvfmx00g24"]
 
 [ext_resource type="Script" path="res://scripts/game_loop.gd" id="1_ex1d5"]
 [ext_resource type="FontFile" uid="uid://btvwq11pvkgw7" path="res://assets/fonts/minimal5x7.ttf" id="2_qlmu1"]
 [ext_resource type="Texture2D" uid="uid://b73m88esaaokv" path="res://assets/sprites/pantalla01.jpg" id="2_xdptr"]
 [ext_resource type="FontFile" uid="uid://clklxr6keityt" path="res://assets/fonts/basis33.ttf" id="3_70j3y"]
 [ext_resource type="Texture2D" uid="uid://bbyw5r3vsic0t" path="res://assets/sprites/chirper_logo.png" id="3_d4uvd"]
+[ext_resource type="Texture2D" uid="uid://c67v2afisdosr" path="res://assets/sprites/graph.png" id="3_ybsto"]
 [ext_resource type="FontFile" uid="uid://c1gg0yw02pyb5" path="res://assets/fonts/dogicapixel.ttf" id="4_1s57y"]
 [ext_resource type="Texture2D" uid="uid://doyon17bpvity" path="res://assets/sprites/calendar.png" id="4_2nfi8"]
 [ext_resource type="PackedScene" uid="uid://bh71olny4pi0k" path="res://scene_objects/category.tscn" id="4_jkiuj"]
@@ -30,12 +31,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(0, 0, 300, 30)]
+"values": [Rect2(0, 0, 320, 30)]
 }
 
 [sub_resource type="Animation" id="Animation_ny8qm"]
 resource_name = "graph_move"
-length = 10.0
+length = 30.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -44,10 +45,10 @@ tracks/0/path = NodePath("graph:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 10),
+"times": PackedFloat32Array(0, 30),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Rect2(0, 0, 300, 30), Rect2(300, 0, 300, 30)]
+"values": [Rect2(0, 0, 320, 30), Rect2(320, 0, 320, 30)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e754d"]
@@ -79,9 +80,11 @@ texture = ExtResource("2_xdptr")
 
 [node name="graph" type="Sprite2D" parent="."]
 texture_repeat = 2
-position = Vector2(156, 54)
+position = Vector2(160, 54)
+scale = Vector2(1, 1.028)
+texture = ExtResource("3_ybsto")
 region_enabled = true
-region_rect = Rect2(0, 0, 300, 30)
+region_rect = Rect2(0, 0, 320, 30)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_right = 40.0
