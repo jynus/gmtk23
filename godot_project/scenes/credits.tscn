@@ -76,11 +76,26 @@ theme_override_fonts/bold_font = ExtResource("4_f8v2u")
 theme_override_font_sizes/normal_font_size = 8
 theme_override_font_sizes/bold_font_size = 8
 bbcode_enabled = true
-text = "[center][b]Design & programming[/b]:
+text = "[center][b]Gameplay, programming & pixelart[/b]:
 
 Jynus
 
- * Made with Godot 4 in 48 hours for the Game Jam *
+[b]Graphic design & ideas[/b]:
+
+montes8ish
+
+[b]Music & sound effects[/b]:
+
+Epidemicsound
+
+[b]Special thanks:[/b]
+
+masabak
+revilot123
+
+ * Made with Godot 4.1 in 48 hours for the GMTK Jam 2023*
+
+[u]https://itch.io/jam/gmtk-2023[/u]
 
 [/center]"
 

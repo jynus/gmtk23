@@ -7,7 +7,7 @@ signal chose_option(text)
 @onready var description = %description
 @onready var left_text = %left_text
 @onready var right_text = %right_text
-
+@onready var button_click = $buttonClick
 
 @export var title_text : String = "":
 	set(value):
@@ -52,8 +52,10 @@ func _process(delta):
 
 
 func _on_left_button_pressed():
+	button_click.play()
 	chose_option.emit(left_button_text)
 
 
 func _on_right_button_pressed():
+	button_click.play()
 	chose_option.emit(right_button_text)

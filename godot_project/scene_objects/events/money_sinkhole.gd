@@ -2,7 +2,7 @@ class_name money_sinkhole extends custom_event
 
 func _init():
 	title = "You lost more than 1 trillion dollars"
-	image_name = "old_ceo.png"
+	image_name = "money_sinkhole.png"
 	description = """Even for you, losing 1 trillion dollars is too much money!
 	Your management led to the website being a mony sinkhole, and you lenders
 	are not happy. It is time to say goodby to playing CEO. The business will

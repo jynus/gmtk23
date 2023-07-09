@@ -1,14 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7fkndcm0e336"]
+[gd_scene load_steps=16 format=3 uid="uid://b7fkndcm0e336"]
 
 [ext_resource type="Script" path="res://scripts/settings.gd" id="1_6tbik"]
 [ext_resource type="PackedScene" uid="uid://k635iu86fy37" path="res://scene_objects/menu_background.tscn" id="2_y53hl"]
-[ext_resource type="LabelSettings" uid="uid://csrb5ilr7y6dy" path="res://resources/main_menu_title_label_setting.tres" id="3_0kf2n"]
+[ext_resource type="FontFile" uid="uid://csfgtka180pkw" path="res://assets/fonts/dogicapixelbold.ttf" id="3_vad8q"]
 [ext_resource type="FontFile" uid="uid://c1gg0yw02pyb5" path="res://assets/fonts/dogicapixel.ttf" id="4_oogrs"]
 [ext_resource type="FontFile" uid="uid://caj4jhhpy0ha7" path="res://assets/fonts/dogicabold.ttf" id="5_4rm0i"]
 [ext_resource type="StyleBox" uid="uid://67m76h2nyeyy" path="res://resources/main_menu_button_style.tres" id="6_6el3k"]
 [ext_resource type="StyleBox" uid="uid://cscwrtv4vl12l" path="res://resources/main_menu_button_hover_style.tres" id="7_rmflb"]
 [ext_resource type="StyleBox" uid="uid://dtfd366g1j00" path="res://resources/main_menu_button_pressed_style.tres" id="8_qnbmh"]
 [ext_resource type="PackedScene" uid="uid://dg8iotoxg8rsy" path="res://scene_objects/blip.tscn" id="9_0dprg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_24na0"]
+font = ExtResource("3_vad8q")
+font_size = 24
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_7a45g"]
 font = ExtResource("4_oogrs")
@@ -57,7 +63,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "Settings"
-label_settings = ExtResource("3_0kf2n")
+label_settings = SubResource("LabelSettings_24na0")
 horizontal_alignment = 1
 
 [node name="optionsMargin" type="MarginContainer" parent="menuContainer"]

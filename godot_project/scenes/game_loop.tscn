@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=3 uid="uid://b7hyvfmx00g24"]
 
-[ext_resource type="Texture2D" uid="uid://bbsai0ufhvr3k" path="res://assets/sprites/graph.png" id="1_1bc68"]
 [ext_resource type="Script" path="res://scripts/game_loop.gd" id="1_ex1d5"]
 [ext_resource type="FontFile" uid="uid://btvwq11pvkgw7" path="res://assets/fonts/minimal5x7.ttf" id="2_qlmu1"]
+[ext_resource type="Texture2D" uid="uid://b73m88esaaokv" path="res://assets/sprites/pantalla01.jpg" id="2_xdptr"]
 [ext_resource type="FontFile" uid="uid://clklxr6keityt" path="res://assets/fonts/basis33.ttf" id="3_70j3y"]
 [ext_resource type="Texture2D" uid="uid://bbyw5r3vsic0t" path="res://assets/sprites/chirper_logo.png" id="3_d4uvd"]
 [ext_resource type="FontFile" uid="uid://c1gg0yw02pyb5" path="res://assets/fonts/dogicapixel.ttf" id="4_1s57y"]
@@ -72,10 +72,14 @@ offset_right = 320.0
 offset_bottom = 180.0
 color = Color(0, 0.392157, 0.392157, 1)
 
+[node name="Pantalla01" type="Sprite2D" parent="."]
+self_modulate = Color(0.607843, 0.847059, 0.847059, 1)
+position = Vector2(160, 90)
+texture = ExtResource("2_xdptr")
+
 [node name="graph" type="Sprite2D" parent="."]
 texture_repeat = 2
 position = Vector2(156, 54)
-texture = ExtResource("1_1bc68")
 region_enabled = true
 region_rect = Rect2(0, 0, 300, 30)
 

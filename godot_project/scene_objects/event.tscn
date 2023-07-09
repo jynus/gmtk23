@@ -1,12 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0687tcbf14ac"]
+[gd_scene load_steps=15 format=3 uid="uid://c0687tcbf14ac"]
 
 [ext_resource type="Script" path="res://scripts/event.gd" id="1_5yskp"]
 [ext_resource type="PackedScene" uid="uid://k635iu86fy37" path="res://scene_objects/menu_background.tscn" id="2_mrb86"]
 [ext_resource type="FontFile" uid="uid://dchaxun0duwqd" path="res://assets/fonts/Berlin Sans FB Demi Bold.ttf" id="2_o6gg5"]
 [ext_resource type="Texture2D" uid="uid://6o58r502oe6v" path="res://assets/sprites/old_ceo.png" id="3_fipq1"]
 [ext_resource type="FontFile" uid="uid://clklxr6keityt" path="res://assets/fonts/basis33.ttf" id="4_74880"]
-[ext_resource type="FontFile" uid="uid://btvwq11pvkgw7" path="res://assets/fonts/minimal5x7.ttf" id="5_cthob"]
 [ext_resource type="FontFile" uid="uid://c1gg0yw02pyb5" path="res://assets/fonts/dogicapixel.ttf" id="6_e52ql"]
+[ext_resource type="FontFile" uid="uid://160hm44pryh4" path="res://assets/fonts/dogica.ttf" id="7_3vnjs"]
+[ext_resource type="StyleBox" uid="uid://ddyluie24jig3" path="res://resources/category_button_1_normal.tres" id="8_yl46l"]
+[ext_resource type="StyleBox" uid="uid://nkswy88priw1" path="res://resources/category_button_1_hover.tres" id="9_1n47y"]
+[ext_resource type="StyleBox" uid="uid://b2uswr51sch7b" path="res://resources/category_button_2_normal.tres" id="9_ecyww"]
+[ext_resource type="StyleBox" uid="uid://wpogxbcy1cd7" path="res://resources/category_button_1_disabled.tres" id="10_4osej"]
+[ext_resource type="StyleBox" uid="uid://dtck8a034qryq" path="res://resources/category_button_2_hover.tres" id="12_lwwys"]
+[ext_resource type="StyleBox" uid="uid://cc488ooqjefkq" path="res://resources/category_button_2_disabled.tres" id="13_a7er0"]
+[ext_resource type="AudioStream" uid="uid://38nbcwarx60o" path="res://assets/sfx/click_button.wav" id="14_1p6tu"]
 
 [node name="event" type="Control"]
 layout_mode = 3
@@ -110,24 +117,69 @@ scroll_active = false
 
 [node name="leftButton" type="Button" parent="ColorRect/VBoxContainer/interaction"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(134, 14)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("5_cthob")
-theme_override_font_sizes/font_size = 16
+focus_mode = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_3vnjs")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = ExtResource("8_yl46l")
+theme_override_styles/hover = ExtResource("9_1n47y")
+theme_override_styles/pressed = ExtResource("9_1n47y")
+theme_override_styles/disabled = ExtResource("10_4osej")
+theme_override_styles/focus = ExtResource("8_yl46l")
 text = "Choose option 1"
 
 [node name="rightButton" type="Button" parent="ColorRect/VBoxContainer/interaction"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(134, 14)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("5_cthob")
-theme_override_font_sizes/font_size = 16
+focus_mode = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_3vnjs")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = ExtResource("9_ecyww")
+theme_override_styles/hover = ExtResource("12_lwwys")
+theme_override_styles/pressed = ExtResource("12_lwwys")
+theme_override_styles/disabled = ExtResource("13_a7er0")
+theme_override_styles/focus = ExtResource("9_ecyww")
 text = "Choose option 2"
 
 [node name="MarginContainer2" type="MarginContainer" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
+
+[node name="buttonClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_1p6tu")
+volume_db = -5.0
+bus = &"sfx"
 
 [connection signal="pressed" from="ColorRect/VBoxContainer/interaction/leftButton" to="." method="_on_left_button_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/interaction/rightButton" to="." method="_on_right_button_pressed"]
